@@ -1,0 +1,5 @@
+layout:
+ - find_cells
+ - find_floors
+ - find_walls
+

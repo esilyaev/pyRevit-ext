@@ -1,0 +1,42 @@
+# -*- coding: utf-8 -*-
+from Autodesk.Revit.DB import *
+from Autodesk.Revit.DB.Architecture import *
+from Autodesk.Revit.DB.Analysis import *
+
+uidoc = __revit__.ActiveUIDocument
+doc = __revit__.ActiveUIDocument.Document
+
+from Autodesk.Revit.UI import TaskDialog
+from Autodesk.Revit.UI import UIApplication
+
+from System.Collections.Generic import *
+
+collPipeSystems = FilteredElementCollector(doc).\
+	OfCategory(BuiltInCategory.OST_PipingSystem).ToElements()
+
+# DS now and late = Duct System
+collDuctSystems = FilteredElementCollector(doc).\
+	OfCategory(BuiltInCategory.OST_DuctSystem).WhereElementIsNotElementType().ToElements()
+DSNameList = [i.Name for i in collDuctSystems]
+
+categories = List[ElementId]()
+#Добавление категорий в фильтр вентиляции
+categories.Add(ElementId(BuiltInCategory.OST_DuctCurves))
+categories.Add(ElementId(BuiltInCategory.OST_DuctFitting))
+categories.Add(ElementId(BuiltInCategory.OST_DuctAccessory))
+categories.Add(ElementId(BuiltInCategory.OST_DuctTerminal))
+categories.Add(ElementId(BuiltInCategory.OST_MechanicalEquipment))
+categories.Add(ElementId(BuiltInCategory.OST_FlexDuctCurves))
+categories.Add(ElementId(BuiltInCategory.OST_DuctInsulations))
+
+t = Transaction(doc, 'apllying filter....')
+t.Start()
+
+#filters creation...
+rules = []
+for name in DSNameList:
+	rules.Add(ParameterFilterRuleFactory.CreateNotEqualsRule\
+		(ElementId(BuiltInParameter.RBS_SYSTEM_NAME_PARAM), name,False))
+	if ParameterFilterElement.IsNameUnique(doc,"200_A_" + name):
+		ParameterFilterElement.Create(doc,"200_A_" + name, categories, rules)
+t.Commit()
