@@ -8,14 +8,15 @@ clr.AddReference('RevitAPIUI')
 from Autodesk.Revit.DB import *
 
 # import other libraries
-import ImportFromExcel
+from ImportFromExcel import *
 from Cheker import Cheker
+
 
 # set the active Revit application and document
 app = __revit__.Application
 doc = __revit__.ActiveUIDocument.Document
 
-RuleList = ImportFromExcel.GetRulesOfChecks()
+RuleList = GetRulesOfChecks()
 testRule = RuleList["03.03.01.01"]
 print(testRule)
 Cheker.checkRule(testRule)

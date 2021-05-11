@@ -12,12 +12,13 @@ from Autodesk.Revit.DB import *
 app = __revit__.Application
 doc = __revit__.ActiveUIDocument.Document
 
-filename = r'D:\sin_work\pyrevit\MyExtensions.extension\pyRevit.tab\elements.json'
+filename = r'U:\__tmp\source\pyRevit.extension\pyRevit.tab\elements.json'
 
 with open(filename) as json_file:
   data = json.load(json_file)
   data = json.loads(data)
 
+i, j = 1
 
 # define a transaction variable and describe the transaction
 t = Transaction(doc, 'Set Work Code to elements ...')

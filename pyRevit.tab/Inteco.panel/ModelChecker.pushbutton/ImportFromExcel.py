@@ -48,8 +48,13 @@ def createListOfRules(List):
 
 
 def GetRulesOfChecks():
+  """Load rule of checks from excel
 
-  PATH = r'U:\__tmp\Аудит LOD_LOI.xlsx'
+  Returns:
+      [type]: [description]
+  """
+
+  PATH = "U:\__tmp\Аудит LOD_LOI.xlsx"
 
   # fd = OpenFileDialog()
   # fd.InitialDirectory = PATH
