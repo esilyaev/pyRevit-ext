@@ -7,7 +7,7 @@ import json
 
 def main():
 
-  filepath = r'C:\Users\SilyaevEO\Desktop\Export2.xml'
+  filepath = r'W:\03_Обмен\Собачка\Export_rev1.xml'
   txt = ''
   with io.open(filepath, 'r', encoding='utf-8') as o:
     txt = o.read()

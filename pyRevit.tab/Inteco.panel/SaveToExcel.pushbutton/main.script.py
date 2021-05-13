@@ -14,7 +14,7 @@ import Microsoft.Office.Interop.Excel as Excel
 app = __revit__.Application
 doc = __revit__.ActiveUIDocument.Document
 
-PATHTOEXCEL = r"U:\__tmp\new.xlsx"
+PATHTOEXCEL = r"U:\__tmp\source\pyRevit.extension\pyRevit.tab\Export_rev1.xlsx"
 PATHTOJSON = r"U:\__tmp\source\pyRevit.extension\pyRevit.tab\elements.json"
 
 with open(PATHTOJSON) as json_file:
@@ -26,11 +26,13 @@ book = ex.Workbooks.Open(PATHTOEXCEL)
 print "Opened"
 sheet = book.Sheets[1]
 
-i = 1
+
+# Position for start write data
+# set 2 coz table have headers and index running from 1 in excel
+i = 2
 
 for line in data:
-  if i == 100:
-    break
+
   print 'Line, %s' % i
   sheet.Cells[i, 1].Value2 = line["1"]
   sheet.Cells[i, 2].Value2 = line["2"]

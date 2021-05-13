@@ -18,7 +18,6 @@ with open(filename) as json_file:
   data = json.load(json_file)
   data = json.loads(data)
 
-i, j = 1
 
 # define a transaction variable and describe the transaction
 t = Transaction(doc, 'Set Work Code to elements ...')
