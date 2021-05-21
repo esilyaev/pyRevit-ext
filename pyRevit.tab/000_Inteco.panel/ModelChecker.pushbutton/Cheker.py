@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 
+__doc__ = 'Проверка элементов модлей на основании правил из xls файла'
+__author__ = '@evgeny.silyaev'
+__version__ = '0.0.0'
+__title__ = "Checker"
+
 # import libraries and reference the RevitAPI and RevitAPIUI
 import clr
 import math

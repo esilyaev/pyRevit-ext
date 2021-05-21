@@ -4,7 +4,7 @@
 __doc__ = 'Анализ параметров и заполнения FSK'
 __author__ = '@unidraft'
 __version__ = '0.0.0'
-__title__ = "FSK классификатор"
+__title__ = "FSK_Код"
 
 
 from Autodesk.Revit.DB import *
