@@ -23,7 +23,7 @@ with open(PATHTOJSON) as json_file:
 
 ex = Excel.ApplicationClass()
 book = ex.Workbooks.Open(PATHTOEXCEL)
-print "Opened"
+print ("Opened")
 sheet = book.Sheets[1]
 
 
@@ -33,7 +33,7 @@ i = 2
 
 for line in data:
 
-  print 'Line, %s' % i
+  print ('Line, %s') % (i)
   sheet.Cells[i, 1].Value2 = line["1"]
   sheet.Cells[i, 2].Value2 = line["2"]
   i += 1

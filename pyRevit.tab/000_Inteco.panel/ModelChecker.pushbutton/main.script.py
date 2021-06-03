@@ -3,12 +3,14 @@
 # import libraries and reference the RevitAPI and RevitAPIUI
 import clr
 import math
+import sys
 clr.AddReference('RevitAPI')
 clr.AddReference('RevitAPIUI')
 from Autodesk.Revit.DB import *
 
 # import other libraries
-from ImportFromExcel import *
+from ImportFromExcel import GetRulesOfChecks
+
 from Cheker import Cheker
 
 
