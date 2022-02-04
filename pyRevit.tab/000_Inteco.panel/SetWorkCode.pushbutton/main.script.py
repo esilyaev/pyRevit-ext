@@ -30,12 +30,16 @@ t.Start()
 for el in data:
 
   Element = doc.GetElement(ElementId(int(el["1"])))
+  if Element is None:
+    continue
+  if Element.LookupParameter("ИНТ_Код работы") is None:
+    continue
   WorkStr = ""
-  if Element.LookupParameter("ИНТ_КодРаботы").AsString() is not None\
-     and Element.LookupParameter("ИНТ_КодРаботы").AsString() != "":
-    WorkStr += Element.LookupParameter("ИНТ_КодРаботы").AsString() + " "
+  if Element.LookupParameter("ИНТ_Код работы").AsString() is not None\
+     and Element.LookupParameter("ИНТ_Код работы").AsString() != "":
+    WorkStr += Element.LookupParameter("ИНТ_Код работы").AsString() + " "
   WorkStr += el["2"]
-  Element.LookupParameter("ИНТ_КодРаботы").Set(WorkStr)
+  Element.LookupParameter("ИНТ_Код работы").Set(WorkStr)
 
 
 # commit the transaction to the Revit database

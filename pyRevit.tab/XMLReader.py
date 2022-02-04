@@ -7,7 +7,7 @@ import json
 
 def main():
 
-  filepath = r'W:\03_Обмен\Собачка\Export_rev1.xml'
+  filepath = r'U:\__tmp\source\pyRevit.extension\pyRevit.tab\2021.09.02_VR4_KR.xml'
   txt = ''
   with io.open(filepath, 'r', encoding='utf-8') as o:
     txt = o.read()
