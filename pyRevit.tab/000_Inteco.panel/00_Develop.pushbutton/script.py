@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-__doc__ = 'Sanbox для rwp'
+__doc__ = 'Export points by *.txt file'
 __author__ = '@evgeny.silyaev'
 __version__ = '0.0.0'
-__title__ = 'sandbox'
+__title__ = 'export points cloud'
 
 import math
 
@@ -11,7 +11,45 @@ from Autodesk.Revit.DB.Structure import StructuralType
 from rpw import revit, db
 
 
-from rpw.ui.forms import select_file
+from rpw.ui.forms import select_file, Alert
+from rpw.ui.forms import FlexForm, Label, TextBox, Separator, Button
+
+components = [
+    Label("Смещение по Х:"),
+    TextBox('x_transorm', Text="x..."),
+
+    Label("Смещение по Y:"),
+    TextBox('y_transorm', Text="y..."),
+
+    Label("Угол поворота:"),
+    TextBox('angle', Text="angle"),
+
+    Separator(),
+    Button('Погнали'),
+
+]
+
+
+form = FlexForm('Экспорт облака точек', components)
+form.show()
+
+try:
+    X_COEF = float(form.values['x_transorm'])
+except:
+    X_COEF = 15444.0073
+
+try:
+    Y_COEF = float(form.values['y_transorm'])
+except:
+    Y_COEF = 250.8947
+
+try:
+    R_COEF = float(form.values['angle'])
+except:
+    R_COEF = 0.4857
+
+
+Z_COEF = 0
 
 filepath = select_file('Text files (*.txt) | *txt')
 if (filepath != ''):
@@ -21,10 +59,9 @@ with open(filepath, 'r') as file:
     lines = file.readlines()
 
 points = []
-X_COEF = 15444.0073
-Y_COEF = 250.8947
-Z_COEF = 0
-R_COEF = 0.4857
+
+
+print("X = ", X_COEF, " Y = ", Y_COEF, " Z = ", Z_COEF, "R_COEF = ", R_COEF)
 
 collection = FilteredElementCollector(
     revit.doc).OfClass(FamilySymbol).ToElements()

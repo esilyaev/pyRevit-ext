@@ -12,7 +12,7 @@ from Autodesk.Revit.DB.Analysis import *
 uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document
 
-#dependencies
+# dependencies
 
 import clr
 clr.AddReference('System.Windows.Forms')
@@ -26,62 +26,66 @@ from System import Windows
 from config import Configurator
 from create_aks import AksCreator
 
+
 class MyWindow(Windows.Window):
-	"""UI manager"""
-	def __init__(self, arg):
-		wpf.LoadComponent(self, xamlfile)
-		
+    """UI manager"""
 
-	def Close_Click(self, sender, args):
-		self.Close()
+    def __init__(self, arg):
+        wpf.LoadComponent(self, xamlfile)
 
-	def Run(self, sender, args):
-		t = Transaction(doc, 'filters and views creation...')
-		t.Start()
-		self.Output.Text = AksCreator(config).Run()
-		 
-		t.Commit()
+    def Close_Click(self, sender, args):
+        self.Close()
 
-	def devMode_Unchecked(self, sender, args):
-		config.devMode = False
-	def devMode_Checked(self, sender, args):
-		config.devMode = True
+    def Run(self, sender, args):
+        t = Transaction(doc, 'filters and views creation...')
+        t.Start()
+        self.Output.Text = AksCreator(config).Run()
+        t.Commit()
 
-	def systemCommon_Unchecked(self, sender, args):
-		config.systemCommon = False
-	def systemCommon_Checked(self, sender, args):
-		config.systemCommon = True
+    def devMode_Unchecked(self, sender, args):
+        config.devMode = False
 
-	def systemPDV_Unchecked(self, sender, args):
-		config.systemPDV = False
-	def systemPDV_Checked(self, sender, args):
-		config.systemPDV = True
+    def devMode_Checked(self, sender, args):
+        config.devMode = True
 
-	def FilterByName_Unchecked(self, sender, args):
-		config.FilterByName = False
-	def FilterByName_Checked(self, sender, args):
-		config.FilterByName = True
+    def systemCommon_Unchecked(self, sender, args):
+        config.systemCommon = False
 
-	def SystemNameFilter_Changed(self, sender, args):
-		config.SystemNameFilter = self.SystemNameFilter.Text
+    def systemCommon_Checked(self, sender, args):
+        config.systemCommon = True
 
-	def FilterByNameNotContains_Unchecked(self, sender, args):
-		config.FilterByNameNotContains = False
-	def FilterByNameNotContains_Checked(self, sender, args):
-		config.FilterByNameNotContains = True
+    def systemPDV_Unchecked(self, sender, args):
+        config.systemPDV = False
 
-	def SystemNameFilterNotContains_Changed(self, sender, args):
-		config.SystemNameFilterNotContains = self.SystemNameFilterNotContains.Text
+    def systemPDV_Checked(self, sender, args):
+        config.systemPDV = True
 
-	def Clear(self, sender, args):
-		config.Reset()
-		self.systemCommon.IsChecked = False
-		self.systemPDV.IsChecked = False
-		self.FilterByName.IsChecked = False
-		self.FilterByNameNotContains.IsChecked = False
-		self.SystemNameFilterNotContains.Text = ""
-		self.SystemNameFilter.Text = ""
+    def FilterByName_Unchecked(self, sender, args):
+        config.FilterByName = False
 
+    def FilterByName_Checked(self, sender, args):
+        config.FilterByName = True
+
+    def SystemNameFilter_Changed(self, sender, args):
+        config.SystemNameFilter = self.SystemNameFilter.Text
+
+    def FilterByNameNotContains_Unchecked(self, sender, args):
+        config.FilterByNameNotContains = False
+
+    def FilterByNameNotContains_Checked(self, sender, args):
+        config.FilterByNameNotContains = True
+
+    def SystemNameFilterNotContains_Changed(self, sender, args):
+        config.SystemNameFilterNotContains = self.SystemNameFilterNotContains.Text
+
+    def Clear(self, sender, args):
+        config.Reset()
+        self.systemCommon.IsChecked = False
+        self.systemPDV.IsChecked = False
+        self.FilterByName.IsChecked = False
+        self.FilterByNameNotContains.IsChecked = False
+        self.SystemNameFilterNotContains.Text = ""
+        self.SystemNameFilter.Text = ""
 
 
 config = Configurator()
